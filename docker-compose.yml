@@ -1,0 +1,10 @@
+services:
+  fastapi-di-backend:
+    container_name: fastapi-di-backend
+    image: fastapi-di-backend:latest
+    working_dir: /app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'

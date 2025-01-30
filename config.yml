@@ -1,0 +1,3 @@
+giphy:
+  api_key: '1488'
+  timeout: 5

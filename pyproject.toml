@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "fastapi-di"
+version = "0.1.0"
+description = ""
+authors = ["kriukov.a <andrei.kriukov@strana.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.6"
+dependency-injector = "^4.45.0"
+uvicorn = "^0.34.0"
+pyyaml = "^6.0.2"
+pytest = "^8.3.4"
+httpx = "^0.28.1"
+pytest-asyncio = "^0.25.2"
+sqlalchemy = "^2.0.37"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
