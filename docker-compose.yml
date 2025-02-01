@@ -8,3 +8,21 @@ services:
       - .:/app
     ports:
       - '8000:8000'
+
+
+  pgdb:
+    container_name: pgdb
+    hostname: pgdb
+    image: postgres:13-alpine3.18
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: root
+      POSTGRES_DB: db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pg_data:

@@ -1,7 +1,10 @@
 from dependency_injector import containers, providers
 
 from .services import SearchService
+from .database import Database
 from .gyphi import GyphiClient
+from .repositories import UserRepository
+from .services import UserService
 
 
 class Container(containers.DeclarativeContainer):

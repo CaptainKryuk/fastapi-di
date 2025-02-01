@@ -1,9 +1,10 @@
 """Application module."""
-
+import uvicorn
 from fastapi import FastAPI
 #
-from .containers import Container
-from . import urls
+from app import urls
+from app.containers import Container
+
 
 
 def create_app() -> FastAPI:
@@ -22,3 +23,6 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

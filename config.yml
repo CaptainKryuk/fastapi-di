@@ -1,3 +1,5 @@
 giphy:
   api_key: '1488'
   timeout: 5
+db:
+  url: 'postgresql://root:pass@pgdb:5432/db'
