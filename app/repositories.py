@@ -2,6 +2,7 @@
 
 from contextlib import AbstractContextManager
 from typing import Callable, Iterator
+from sqlalchemy import inspect
 
 from sqlalchemy.orm import Session
 

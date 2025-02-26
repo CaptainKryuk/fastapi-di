@@ -1,14 +1,16 @@
 
-from typing import Optional, List
+from typing import List
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
-from dependency_injector.wiring import inject, Provide
+from dependency_injector.wiring import inject as di_inject, Provide
 from starlette import status
+from aioinject import inject, Injected
 
-from repositories import NotFoundError
-from .services import SearchService, UserService
-from .containers import Container
+from app.aio_container import TestRepository
+from app.repositories import NotFoundError
+from .services import UserService
+from .di_container import Container
 
 
 class Gif(BaseModel):
@@ -25,7 +27,7 @@ router = APIRouter()
 
 
 @router.get("/users")
-@inject
+@di_inject
 def get_list(
     user_service: UserService = Depends(Provide[Container.user_service]),
 ):
@@ -33,7 +35,7 @@ def get_list(
 
 
 @router.get("/users/{user_id}")
-@inject
+@di_inject
 def get_by_id(
     user_id: int,
     user_service: UserService = Depends(Provide[Container.user_service]),
@@ -45,7 +47,7 @@ def get_by_id(
 
 
 @router.post("/users", status_code=status.HTTP_201_CREATED)
-@inject
+@di_inject
 def add(
     user_service: UserService = Depends(Provide[Container.user_service]),
 ):
@@ -53,7 +55,7 @@ def add(
 
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
-@inject
+@di_inject
 def remove(
     user_id: int,
     user_service: UserService = Depends(Provide[Container.user_service]),
@@ -66,6 +68,24 @@ def remove(
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.get("/status")
-def get_status():
-    return {"status": "OK"}
+# @router.get(
+#     "/status",
+#     response_model=dict,
+# )
+# # @aio_di_inject
+# async def get_status(
+#     # repository: Injected[TestRepository],
+#     repository: TestRepository = None,
+# ) -> dict:
+#     print(repository)
+#     return {'status': 'ok'}
+
+@router.get(
+    "/status",
+)
+@inject
+def get_status(
+    repo: Injected[int],
+) -> None:
+    print(repo)
+    return 'ok'
